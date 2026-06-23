@@ -15,33 +15,64 @@ const Bubble = ({ left, size, delay, duration }: any) => (
   />
 )
 
-const Header = () => (
-  <header className="fixed top-0 w-full bg-white shadow-sm z-50">
-    <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-      <div className="flex items-center gap-2 text-lux-royal font-bold text-2xl">
-        <i className="bi bi-droplet-half text-lux-cyan"></i>
-        LUXLIMP
+const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <header className="fixed top-0 w-full bg-white shadow-sm z-50">
+      <div className="container mx-auto px-4 h-20 flex items-center justify-between">
+        <div className="flex items-center gap-2 text-lux-royal font-bold text-2xl">
+          <i className="bi bi-droplet-half text-lux-cyan"></i>
+          LUXLIMP
+        </div>
+        
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex gap-6 text-slate-600 font-medium">
+          <a href="#inicio" className="hover:text-lux-cyan transition-colors">Início</a>
+          <a href="#produtos" className="hover:text-lux-cyan transition-colors">Produtos</a>
+          <a href="#piscinas" className="hover:text-lux-cyan transition-colors">Piscinas</a>
+          <a href="#limpeza-pesada" className="hover:text-lux-cyan transition-colors">Limpeza Pesada</a>
+          <a href="#sobre" className="hover:text-lux-cyan transition-colors">Sobre</a>
+          <a href="#contato" className="hover:text-lux-cyan transition-colors">Contato</a>
+        </nav>
+
+        <div className="flex items-center gap-3">
+          <a 
+            href={`https://wa.me/5511960842449?text=${encodeURIComponent('Olá! Gostaria de mais informações sobre os produtos da Luxlimp.')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-lux-green hover:bg-green-600 text-white px-4 py-2 md:px-6 md:py-2 rounded-full font-semibold transition-all shadow-md flex items-center gap-2 text-sm md:text-base"
+          >
+            <i className="bi bi-whatsapp"></i>
+            <span className="hidden sm:inline">WhatsApp</span>
+          </a>
+          
+          <button 
+            className="md:hidden text-3xl text-lux-royal" 
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle Menu"
+          >
+            <i className={`bi ${isOpen ? 'bi-x' : 'bi-list'}`}></i>
+          </button>
+        </div>
       </div>
-      <nav className="hidden md:flex gap-6 text-slate-600 font-medium">
-        <a href="#inicio" className="hover:text-lux-cyan transition-colors">Início</a>
-        <a href="#produtos" className="hover:text-lux-cyan transition-colors">Produtos</a>
-        <a href="#piscinas" className="hover:text-lux-cyan transition-colors">Piscinas</a>
-        <a href="#limpeza-pesada" className="hover:text-lux-cyan transition-colors">Limpeza Pesada</a>
-        <a href="#sobre" className="hover:text-lux-cyan transition-colors">Sobre</a>
-        <a href="#contato" className="hover:text-lux-cyan transition-colors">Contato</a>
-      </nav>
-      <a 
-        href="https://wa.me/5500000000000" 
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-lux-green hover:bg-green-600 text-white px-6 py-2 rounded-full font-semibold transition-all shadow-md flex items-center gap-2"
-      >
-        <i className="bi bi-whatsapp"></i>
-        <span className="hidden sm:inline">Falar no WhatsApp</span>
-      </a>
-    </div>
-  </header>
-)
+      
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
+          <nav className="flex flex-col text-slate-600 font-medium">
+            <a href="#inicio" onClick={() => setIsOpen(false)} className="px-6 py-4 border-b border-gray-50 hover:bg-gray-50">Início</a>
+            <a href="#produtos" onClick={() => setIsOpen(false)} className="px-6 py-4 border-b border-gray-50 hover:bg-gray-50">Produtos</a>
+            <a href="#piscinas" onClick={() => setIsOpen(false)} className="px-6 py-4 border-b border-gray-50 hover:bg-gray-50">Piscinas</a>
+            <a href="#limpeza-pesada" onClick={() => setIsOpen(false)} className="px-6 py-4 border-b border-gray-50 hover:bg-gray-50">Limpeza Pesada</a>
+            <a href="#sobre" onClick={() => setIsOpen(false)} className="px-6 py-4 border-b border-gray-50 hover:bg-gray-50">Sobre</a>
+            <a href="#contato" onClick={() => setIsOpen(false)} className="px-6 py-4 hover:bg-gray-50">Contato</a>
+          </nav>
+        </div>
+      )}
+    </header>
+  )
+}
 
 const Hero = () => {
   const bubbles = Array.from({ length: 15 }).map((_, i) => ({
@@ -74,7 +105,12 @@ const Hero = () => {
               <a href="#produtos" className="bg-white text-lux-royal px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition-colors shadow-lg">
                 Conhecer Produtos
               </a>
-              <a href="#contato" className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition-colors">
+              <a 
+                href={`https://wa.me/5511960842449?text=${encodeURIComponent('Olá! Gostaria de solicitar um atendimento e conhecer mais sobre os produtos.')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition-colors"
+              >
                 Solicitar Atendimento
               </a>
             </div>
@@ -175,7 +211,12 @@ const FeaturedProducts = () => {
               <div className="p-6 flex flex-col flex-1 bg-white relative z-20">
                 <h3 className="text-lg font-bold text-lux-royal mb-2 leading-tight">{p.name}</h3>
                 <p className="text-sm text-gray-600 mb-6 flex-1">{p.desc}</p>
-                <a href="#contato" className="block w-full text-center bg-lux-light/10 text-lux-royal hover:bg-lux-cyan hover:text-white font-semibold py-2.5 rounded-xl transition-colors text-sm">
+                <a 
+                  href={`https://wa.me/5511960842449?text=${encodeURIComponent(`Olá! Gostaria de pedir um orçamento para o produto: ${p.name}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full text-center bg-lux-light/10 text-lux-royal hover:bg-lux-cyan hover:text-white font-semibold py-2.5 rounded-xl transition-colors text-sm"
+                >
                   Pedir orçamento
                 </a>
               </div>
@@ -316,7 +357,7 @@ const CTA = () => {
       <div className="container mx-auto px-4 text-center relative z-10">
         <h2 className="text-3xl md:text-4xl font-bold mb-8">Precisa de produtos de limpeza para sua casa, empresa ou revenda?</h2>
         <a 
-          href="https://wa.me/5500000000000" 
+          href={`https://wa.me/5511960842449?text=${encodeURIComponent('Olá! Preciso de produtos de limpeza e gostaria de um orçamento.')}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-3 bg-lux-green hover:bg-green-600 text-white px-8 py-4 rounded-full font-bold text-xl transition-all shadow-xl hover:scale-105"
@@ -336,7 +377,7 @@ const Contact = () => {
     e.preventDefault()
     // handle submit to whatsapp or api
     const text = `Olá, me chamo ${form.name} de ${form.city}. Tenho interesse em ${form.product}. ${form.message}`
-    window.open(`https://wa.me/5500000000000?text=${encodeURIComponent(text)}`, '_blank')
+    window.open(`https://wa.me/5511960842449?text=${encodeURIComponent(text)}`, '_blank')
   }
 
   return (
@@ -404,12 +445,20 @@ const Footer = () => (
           </p>
         </div>
         <div>
-          <h4 className="font-bold text-lg mb-4">Links Rápidos</h4>
-          <ul className="space-y-2 text-lux-light/80 text-sm">
-            <li><a href="#inicio" className="hover:text-white transition-colors">Início</a></li>
-            <li><a href="#produtos" className="hover:text-white transition-colors">Produtos</a></li>
-            <li><a href="#sobre" className="hover:text-white transition-colors">Sobre Nós</a></li>
-            <li><a href="#contato" className="hover:text-white transition-colors">Contato</a></li>
+          <h4 className="font-bold text-lg mb-4">Região de Atendimento</h4>
+          <ul className="space-y-3 text-lux-light/80 text-sm">
+            <li className="flex items-center gap-2">
+              <i className="bi bi-geo-alt text-lux-cyan"></i>
+              Atibaia e região
+            </li>
+            <li className="flex items-center gap-2">
+              <i className="bi bi-geo-alt text-lux-cyan"></i>
+              São Paulo
+            </li>
+            <li className="flex items-center gap-2">
+              <i className="bi bi-geo-alt text-lux-cyan"></i>
+              Campinas
+            </li>
           </ul>
         </div>
         <div>
@@ -423,20 +472,25 @@ const Footer = () => (
         </div>
         <div>
           <h4 className="font-bold text-lg mb-4">Contato</h4>
-          <ul className="space-y-3 text-lux-light/80 text-sm">
+          <ul className="space-y-3 text-lux-light/80 text-sm mb-6">
             <li className="flex items-center gap-2">
               <i className="bi bi-whatsapp text-lux-cyan"></i>
-              (00) 00000-0000
+              (11) 96084-2449
             </li>
             <li className="flex items-center gap-2">
               <i className="bi bi-envelope text-lux-cyan"></i>
-              contato@luxlimp.com.br
-            </li>
-            <li className="flex items-center gap-2">
-              <i className="bi bi-instagram text-lux-cyan"></i>
-              @luxlimpoficial
+              marcioribeirotadeu1@gmail.com
             </li>
           </ul>
+          <h4 className="font-bold text-lg mb-4">Redes Sociais</h4>
+          <div className="flex gap-4">
+            <a href="https://www.instagram.com/luxlimp_?utm_source=qr&igsh=eDJrejZpM2RwbW1p" target="_blank" rel="noopener noreferrer" className="bg-white/10 w-10 h-10 rounded-full flex items-center justify-center hover:bg-pink-500 hover:text-white transition-colors" aria-label="Instagram">
+              <i className="bi bi-instagram text-xl"></i>
+            </a>
+            <a href="https://www.facebook.com/share/18P6tjTqq2/" target="_blank" rel="noopener noreferrer" className="bg-white/10 w-10 h-10 rounded-full flex items-center justify-center hover:bg-blue-600 hover:text-white transition-colors" aria-label="Facebook">
+              <i className="bi bi-facebook text-xl"></i>
+            </a>
+          </div>
         </div>
       </div>
       <div className="text-center text-lux-light/50 text-sm pt-8 border-t border-white/10">
@@ -448,7 +502,7 @@ const Footer = () => (
 
 const FloatingWhatsApp = () => (
   <a
-    href="https://wa.me/5500000000000"
+    href={`https://wa.me/5511960842449?text=${encodeURIComponent('Olá! Gostaria de falar com um atendente da Luxlimp.')}`}
     target="_blank"
     rel="noopener noreferrer"
     className="fixed bottom-6 right-6 bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform z-50 hover:bg-[#20bd5a]"
