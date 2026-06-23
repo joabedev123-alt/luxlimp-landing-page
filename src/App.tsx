@@ -493,8 +493,13 @@ const Footer = () => (
           </div>
         </div>
       </div>
-      <div className="text-center text-lux-light/50 text-sm pt-8 border-t border-white/10">
-        &copy; {new Date().getFullYear()} Luxlimp. Todos os direitos reservados.
+      <div className="text-center text-lux-light/50 text-sm pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div>
+          &copy; {new Date().getFullYear()} Luxlimp. Todos os direitos reservados.
+        </div>
+        <div className="text-lux-light/70">
+          Produzida com 💚 por <a href="https://camaly.com.br/" target="_blank" rel="noopener noreferrer" className="text-white font-bold hover:text-lux-cyan transition-colors">CAMALY</a>
+        </div>
       </div>
     </div>
   </footer>
