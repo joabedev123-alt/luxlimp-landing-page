@@ -432,7 +432,7 @@ const Contact = () => {
 }
 
 const Footer = () => (
-  <footer className="bg-lux-royal text-white pt-16 pb-8 border-t border-white/10">
+  <footer className="bg-lux-royal text-white pt-16 pb-24 md:pb-8 border-t border-white/10">
     <div className="container mx-auto px-4">
       <div className="grid md:grid-cols-4 gap-12 mb-12">
         <div className="md:col-span-1">
@@ -497,7 +497,7 @@ const Footer = () => (
         <div>
           &copy; {new Date().getFullYear()} Luxlimp. Todos os direitos reservados.
         </div>
-        <div className="text-lux-light/70">
+        <div className="text-lux-light/70 md:pr-24">
           Produzida com 💚 por <a href="https://camaly.com.br/" target="_blank" rel="noopener noreferrer" className="text-white font-bold hover:text-lux-cyan transition-colors">CAMALY</a>
         </div>
       </div>
